@@ -1,0 +1,109 @@
+﻿@using ApplicationCore.ServiceInterfaces
+@model ApplicationCore.Models.MovieCreateRequest
+@inject IGenreService GenreService;
+@{
+    ViewData["Title"] = "CreateView";
+}
+
+<h3>Create Movie</h3>
+
+<hr/>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="CreateMovie">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control"/>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Overview"></label>
+                <input asp-for="Overview" class="form-control"/>
+                <span asp-validation-for="Overview" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tagline"></label>
+                <input asp-for="Tagline" class="form-control"/>
+                <span asp-validation-for="Tagline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Revenue"></label>
+                <input asp-for="Revenue" class="form-control"/>
+                <span asp-validation-for="Revenue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget"></label>
+                <input asp-for="Budget" class="form-control"/>
+                <span asp-validation-for="Budget" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImdbUrl"></label>
+                <input asp-for="ImdbUrl" class="form-control"/>
+                <span asp-validation-for="ImdbUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TmdbUrl"></label>
+                <input asp-for="TmdbUrl" class="form-control"/>
+                <span asp-validation-for="TmdbUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PosterUrl"></label>
+                <input asp-for="PosterUrl" class="form-control"/>
+                <span asp-validation-for="PosterUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BackdropUrl"></label>
+                <input asp-for="BackdropUrl" class="form-control"/>
+                <span asp-validation-for="BackdropUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginalLanguage"></label>
+                <input asp-for="OriginalLanguage" class="form-control"/>
+                <span asp-validation-for="OriginalLanguage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseDate"></label>
+                <input asp-for="ReleaseDate" class="form-control"/>
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RunTime"></label>
+                <input asp-for="RunTime" class="form-control"/>
+                <span asp-validation-for="RunTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="CreateMovie" class="btn btn-primary">
+                    Create Movie
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<div class="row justify-content-center">
+    <h5 class="mb-2">Genres</h5>
+    <div class="form-check col-md-4">
+
+        @foreach (var genre in await GenreService.GetAllGenres())
+        {
+            <input name="genre" type="checkbox" value="@genre.Id"/>
+            @genre.Name<br/>
+        }
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
